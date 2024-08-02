@@ -10,6 +10,9 @@ def get_db():
     db = client["BD1"]
     return db
 
+
+
+
 @app.route('/')
 def iniciar():
     return render_template('principal.html')
