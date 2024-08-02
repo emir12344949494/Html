@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/does.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='css/database.svg') }}" type="image/svg+xml">
+    <title>Datos del Inventario</title>
+</head>
+   <style>
+    .delta {
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    padding: 15px 30px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+   </style>
+<body>
+    <div class="container">
+        <h2>Su registro se guardo extiosamente en la Base de datos</h2>
+           <br>
+        <button class="delta" href="{{ url_for('add_item') }}" onclick="location.href='/add_item'">Agregar un nuevo producto</button>
+    </div>
+</body>
+</html>
+

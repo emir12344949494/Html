@@ -1,0 +1,43 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document List</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Genero</th>
+                <th>Correo</th>
+                <th>Contraseña</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for documento in datos %}
+                <tr>
+                    <td>{{ documento.nombre }}</td>
+                    <td>{{ documento.apellido }}</td>
+                    <td>{{ documento.genero }}</td>
+                    <td>{{ documento.correo }}</td>
+                    <td>{{ documento.contraseña }}</td>
+                    <td>
+                        <form action="{{ url_for('edit_document') }}" method="post">
+                            <input type="hidden" name="nombre" value="{{ documento.nombre }}">
+                            <input type="hidden" name="apellido" value="{{ documento.apellido }}">
+                            <input type="hidden" name="genero" value="{{ documento.genero }}">
+                            <input type="hidden" name="correo" value="{{ documento.correo }}">
+                            <input type="hidden" name="contraseña" value="{{ documento.contraseña }}">
+                            <button type="submit" class="submit">Editar</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,70 @@
+.colores{
+    background-color: #333333;
+}
+
+body {
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+}
+
+.uno {
+    font-size: 30px;
+}
+
+.container{
+    background: rgb(254, 254, 254);
+    max-width: 1500px;
+    width: 90%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.perro{
+    background-color: #0b0b0b; /* Color de fondo similar al de la imagen */
+    padding: 40px 0;
+}
+
+.fd{
+    width: 380px;
+    height: 110px;
+    background-color: #0061a8;  
+}
+
+.ratas{
+    width: 200px;
+    height: 100px;
+}
+
+.equipment-card{
+        background-color: #f6f2f1;
+        border: 1px solid #f6f2f1;
+        padding: 20px;
+        width: 325px;
+        height: 245px;
+        margin: 10px;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+img {
+    max-width: 300px;
+    height: 150px;
+}
+
+h2 {
+    font-size: 1rem;
+    margin-top: 8px;
+}
+
+p {
+    font-size: 0.7rem;
+    color: #555;
+    
+}
+
+.angles {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+

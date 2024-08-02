@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Productos.css') }}">
+    <link  class="ops" rel="icon" href="{{ url_for('static', filename='css/carrito.svg') }}" type="image/svg+xml">
+    
+    <title>Carrito</title>
+</head>
+<section class="colores">
+ <body>
+  <section  class="luis">
+      <contenedor  class="serie">
+        <h1 class="uno"><center>Logistica y mantenimiento de Vehiculos
+          <center>Trailer Palza
+        </h1>
+        <section class="perro"> 
+            <nav>
+              <ul>
+                <li><a href="/"><strong>Home</strong></a></li>
+              </ul>
+            </nav>
+        </section>
+      </contenedor>
+        
+        <div class="carousel">
+          <div class="carousel-images">
+              <img src="{{ url_for('static', filename='imagenes/017.png') }}" alt="Image 1">
+              <img src="{{ url_for('static', filename='imagenes/016.png') }}" alt="Image 2">
+              <img src="{{ url_for('static', filename='imagenes/018.png') }}" alt="Image 3">
+              <img src="{{ url_for('static', filename='imagenes/019.png') }}" alt="Image 4">
+              <!-- Add more images as needed -->
+          </div>
+        </div>
+     
+      <div class="search-container">
+        <select id="tire-width">
+            <option value="">Ancho de neumático</option>
+            <option value="185">185-20</option>
+            <option value="195">195-20</option>
+            <option value="205">205-20</option>
+            <option value="425">425-20</option>
+            
+            <!-- Opciones se generarían dinámicamente aquí -->
+        </select>
+        <select id="series">
+            <option value="">Serie de la llanta</option>
+            <option value="R15">R15</option>
+            <option value="R16">R16</option>
+            <option value="R17">R17</option>
+            <option value="R18">R18</option>
+            <!-- Opciones se generarían dinámicamente aquí -->
+        </select>
+        <select id="load-index">
+            <option value="">Índice de carga</option>
+            <option value="80">80-T</option>
+            <option value="85">85-T</option>
+            <option value="90">90-T</option>
+            <option value="95">95-T</option>
+
+            <!-- Opciones se generarían dinámicamente aquí -->
+        </select>
+        <select id="speed-index">
+            <option value="">Marca de la llanta</option>
+            <option value="Michelin">Michelin</option>
+            <option value="Continental">Continental</option>
+            <option value="Pirelli">Pirelli</option>
+
+
+            <!-- Opciones se generarían dinámicamente aquí -->
+        </select>
+        <button class="search-button" onclick="location.href='/catalogo'">BUSCAR</button>
+        <button class="search-button"  onclick="location.href='/vista'">ingresa al inventario</button>
+
+        <div class="speedometer">
+            <!-- Gráfico del velocímetro -->
+        </div>
+    </div>
+    <br>
+   <section class="rayo">
+    <footer>
+      <br>
+       <br>
+        <br>
+           <br>
+             <br>
+               <br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a>Pagina creada 24 de Mayo del 2024,
+        Copyright ©2024 Reservados por Derechos de Autor,
+          Mexico.
+                <br>
+                <br>
+              <br>
+            <br>
+          <br> 
+    </footer>
+   </section>
+    <script src="{{ url_for('static', filename='js/carrusel.js') }}"></script>
+  </section>
+ </body>
+</section>
+</html>

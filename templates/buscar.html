@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Busquedas.css') }}">
+    <link  class="ops" rel="icon" href="{{ url_for('static', filename='css/calendario.svg') }}" type="image/svg+xml">
+    <title>Agendar-Cita</title>
+</head>
+<meta  charset="UTF-8">
+<style>
+  .container {
+    background-image: url("{{ url_for('static', filename='imagenes/006.jpg') }}");
+  }
+</style>
+
+<body>
+<section class="cold">
+  <section class="perro">
+    <nav>
+      <ul>
+        <li><a href="/"><strong>Home</strong></a></li>
+        <li><a href="/productos"><strong>Productos</strong></a></li>
+        <li><a href="#"><strong>Moto</strong></a></li>
+        <li><a href="#"><strong>Camión</strong></a></li>
+        <li><a href="#"><strong>Agrícola</strong></a></li>
+        <li><a href="#"><strong>Ofertas</strong></a></li>
+        <li><a href="#"><strong>Talleres</strong></a></li>
+        <li><a href="/desarrollador"><strong>Aserca de desarrollador</strong></a></li>
+      </ul>
+    </nav>
+  </section>
+  <br>
+  <br>
+    <div class="container">
+      <div class="contact-form">
+        <h3>Contacte un <span class="highlight">ejecutivo</span></h3>
+        <form>
+            <label for="name" class="rafa" >Nombre</label>
+            <input type="text" id="name" name="name" required  placeholder="Introduce tu nombre">
+            
+            <label for="phone" class="rafa">Teléfono</label>
+            <input type="tel" id="phone" name="phone" required  placeholder="Introduce tu telefono">
+            
+            <label for="email" class="rafa">Correo electrónico</label>
+            <input type="email" id="email" name="email" required placeholder="Introduce tu correo@">
+            
+            <label for="service" class="rafa">Servicio de interés</label>
+            <select id="service" name="service" required>
+                <option value="">Seleciones el servicio</option>
+                <option value="option1">Mantenimiento de motor</option>
+                <option value="option2">Cambio de ruedas</option>
+                <option value="option3">Cambio de bujias</option>
+                <option value="option4">Restauracion de pintura</option>
+                <option value="option5">Lavado de motor</option>
+                <option value="option6">Cambio de aceite</option>
+                <option value="option7">Otro</option>
+            </select>
+            <label for="service" class="rafa">Tipo de Vehiculo</label>
+            <select id="service" name="service" required>
+                <option value="">Seleciones el tipo de vehiculo</option>
+                <option value="option1">Tractocamion</option>
+                <option value="option2">Carro</option>
+                <option value="option3">Camioneta</option>
+                <option value="option4">Tractor</option>
+                <option value="option5">Tractomula</option>
+                <option value="option6">Moto</option>
+                <option value="option7">Otro</option>
+            </select>
+        </form>
+    </div>
+    </div>
+    <br>
+    <br>
+    <section class="black">
+        <h1><center></cdenter>Últimas Noticias de Motor</h1>
+    <section class="content">
+        <div class="left">Programa para la reuso de las llantas en todo México en los centros de reciclaje</div>
+        <div class="center">El uso de bicicletas para disminuir el dióxido de carbono dentro de las ciudades en México</div>
+        <div class="right">El aumento de precio en el diesel en los estados del norte como Baja California, Coahuila, Sonora, Chihuahua y Nuevo León</div>
+        <div class="center">has un matenimineto preventivo en tu motor y una revision antes salir a carretera</div>
+    </section>
+    <br>
+    <center><img src="{{ url_for('static', filename='imagenes/005.jpg') }}"></center>
+    <center><h3>Por que confiar en nosotros</h3></center>
+    <section class="final">
+    <footer>
+        <br>
+        <div class="newsletter">
+          <h2>Noticias al Dia&nbsp;&nbsp;&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="25" height="30" fill="currentColor" class="bi bi-chat-text-fill" viewBox="0 0 16 16">
+            <path d="M16 8c0 3.866-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7M4.5 5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1zm0 2.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1zm0 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1z"/>
+          </svg></h2>
+          <hr>
+          <p>Inscríbete a nuestro boletín de noticias:</p>
+          <div class="input-container">
+              <input type="email" placeholder="Introduce tu @mail">
+              <button>&#8250;</button>
+          </div>
+          <div class="checkbox-container">
+              <label>
+                  <input type="checkbox">
+                  Acepto recibir información comercial
+              </label>
+              <label>
+                  <input type="checkbox">
+                  Acepto la política de protección de datos
+                  del usuario
+              </label>
+            </div>
+          </div>
+             <br>
+              <br>
+                <br>
+                 <br>
+               <br> 
+            <br>
+         <br>
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a>Pagina creada 24 de Mayo del 2024,
+          Copyright ©2024 Reservados por Derechos de Autor,
+            Mexico.
+      <br>
+    <br>
+    </footer>
+  </section> 
+</section>  
+</section> 
+</body>
+</section>
+</html>
