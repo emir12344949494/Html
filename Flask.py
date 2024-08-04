@@ -11,7 +11,7 @@ def get_db():
     return db
 
 @app.route('/')
-def iniciar():
+def principal():
     return render_template('principal.html')
 
 @app.route('/buscar')
