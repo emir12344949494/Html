@@ -1,46 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Visualización</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="icon" href="{{ url_for('static', filename='css/database.svg') }}" type="image/svg+xml">
+    <title>Visualize Data</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
+<style>
+    
+</style>
 <body>
-    <section class="delta">
-        <h1 class="home">Logística y Mantenimiento de Vehículos</h1>
-        <h1 class="home">Trailer Palza</h1>
-        
-        <section class="perro"> 
-            <nav>
-                <ul>
-                    <li><a href="/"><strong>Home</strong></a></li>
-                </ul>
-            </nav>
-        </section>
+    <h1>Inventory Data</h1>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+        </tr>
+        {% for item in inventario %}
+        <tr>
+            <td>{{ item.nombre }}</td>
+            <td>{{ item.cantidad }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 
-        <section class="container">
-            <h1 class="center">Registro dentro de la base de datos</h1>
-            <table border="1">
-                <tr>
-                    <th>Nombre</th>
-                    <th>Cantidad</th>
-                    <th>Acciones</th>
-                </tr>
-                {% for item in inventario %}
-                <tr>
-                    <td>{{ item.nombre }}</td>
-                    <td>{{ item.cantidad }}</td>
-                    <td>
-                        <form action="{{ url_for('editar_inventario', id=item.id) }}" method="get" style="display:inline;">
-                            <button type="submit">Editar</button>
-                        </form>
-                        <form action="{{ url_for('eliminar_inventario', id=item.id) }}" method="post" style="display:inline;">
-                            <button type="submit">Eliminar</button>
-                        </form>
-                    </td>
-                </tr>
-                {% endfor %}
-            </table>
+    <h1>Registration Data</h1>
+    <table border="1">
+        <tr>
+            <th>Product</th>
+            <th>Employee Key</th>
+            <th>Password</th>
+            <th>Branch</th>
+            <th>Database</th>
+        </tr>
+        {% for reg in registros %}
+        <tr>
+            <td>{{ reg.producto }}</td>
+            <td>{{ reg.clave_empleado }}</td>
+            <td>{{ reg.contraseña }}</td>
+            <td>{{ reg.sucursal }}</td>
+            <td>{{ reg.base_datos }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 
             <h1 class="center">Registro de la base de datos</h1>
             <table border="1">
