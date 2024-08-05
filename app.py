@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, request, redirect, url_for
 from pymongo import MongoClient
 from bson.objectid import ObjectId
@@ -90,11 +89,18 @@ def register():
             'base_datos': base_datos
         })
         return redirect(url_for('inventario_route'))
-        
     return render_template('register.html')
+
+@app.route('/visualize_data')
+def visualize_data():
+    db = get_db()
+    inventario = list(db.cantidad.find())
+    registros = list(db.registro.find())
+    return render_template('visualize_data.html', inventario=inventario, registros=registros)
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
 
 

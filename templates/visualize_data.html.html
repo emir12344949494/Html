@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visualize Data</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Inventory Data</h1>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+        </tr>
+        {% for item in inventario %}
+        <tr>
+            <td>{{ item.nombre }}</td>
+            <td>{{ item.cantidad }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h1>Registration Data</h1>
+    <table border="1">
+        <tr>
+            <th>Product</th>
+            <th>Employee Key</th>
+            <th>Password</th>
+            <th>Branch</th>
+            <th>Database</th>
+        </tr>
+        {% for reg in registros %}
+        <tr>
+            <td>{{ reg.producto }}</td>
+            <td>{{ reg.clave_empleado }}</td>
+            <td>{{ reg.contraseña }}</td>
+            <td>{{ reg.sucursal }}</td>
+            <td>{{ reg.base_datos }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+
