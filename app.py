@@ -96,7 +96,7 @@ def visualize_data():
     db = get_db()
     inventario = list(db.cantidad.find())
     registros = list(db.registro.find())
-    return render_template('visualize.html', inventario=inventario, registros=registros)
+    return render_template('interior.html', inventario=inventario, registros=registros)
 
 if __name__ == '__main__':
     app.run(debug=True)
