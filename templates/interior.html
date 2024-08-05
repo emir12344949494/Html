@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Visualize Data</title>
+    <title>Vizualizacion</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link class="ops" rel="icon" href="{{ url_for('static', filename='css/database.svg') }}" type="image/svg+xml">
 </head>
 <style>
     body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
+    background-color: #333333;
     padding: 20px;
-}
+    }
 
 h1 {
-    color: #333;
+    color: #000000;
 }
 
 table {
@@ -43,11 +43,17 @@ tr:hover {
     background-color: #f1f1f1;
 }
 
+.container{
+ margin: auto;
+ background-color: #f1f1f1;
+}
+
 
 </style>
-<section class="colores">
+
 <body>
-    <h1>Resgistro dentro de la base de daots</h1>
+  <section  class="container">
+    <h1>Resgistro dentro de la base de datos</h1>
     <table border="1">
         <tr>
             <th>Nombre</th>
@@ -80,7 +86,7 @@ tr:hover {
         </tr>
         {% endfor %}
     </table>
+  </section>
 </body>
-</section>
 </html
 
