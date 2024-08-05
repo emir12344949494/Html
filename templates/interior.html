@@ -5,14 +5,53 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <style>
-    
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+
 </style>
+<section class="colores">
 <body>
-    <h1>Inventory Data</h1>
+    <h1>Resgistro dentro de la base de daots</h1>
     <table border="1">
         <tr>
-            <th>Name</th>
-            <th>Quantity</th>
+            <th>Nombre</th>
+            <th>Cantidad</th>
         </tr>
         {% for item in inventario %}
         <tr>
@@ -22,14 +61,14 @@
         {% endfor %}
     </table>
 
-    <h1>Registration Data</h1>
+    <h1>Registro de la base de datos</h1>
     <table border="1">
         <tr>
-            <th>Product</th>
-            <th>Employee Key</th>
-            <th>Password</th>
-            <th>Branch</th>
-            <th>Database</th>
+            <th>Producto</th>
+            <th>Clave de empleado</th>
+            <th>Contraseña</th>
+            <th>Sucursal</th>
+            <th>Base de datos</th>
         </tr>
         {% for reg in registros %}
         <tr>
@@ -42,5 +81,6 @@
         {% endfor %}
     </table>
 </body>
+</section>
 </html
 
