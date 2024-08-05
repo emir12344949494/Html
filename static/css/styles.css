@@ -93,9 +93,14 @@ tr:hover {
 .delta{
     background: #f1f1f1;
     height: 850px;
+    width: 1590px;
 }
 
 .perro{
     background-color: #000000;
     padding: 25px 0;
+}
+
+.home{
+    font-size: 25px;
 }
