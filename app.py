@@ -91,7 +91,7 @@ def register():
         return redirect(url_for('inventario_route'))
     return render_template('register.html')
 
-@app.route('/visualize_data')
+@app.route('/interior')
 def visualize_data():
     db = get_db()
     inventario = list(db.cantidad.find())
