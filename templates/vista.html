@@ -2,40 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/vista.css') }}">
-    <title>Registros</title>
+    <title>Data from MongoDB</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<meta charset="UTF-8">
-<section class="colores">
-
- <body>
+<body>
+    <h1>Inventario</h1>
     <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Edad</th>
-                <th>Ciudad</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Juan Pérez</td>
-                <td>28</td>
-                <td>Madrid</td>
-            </tr>
-            <tr>
-                <td>María López</td>
-                <td>34</td>
-                <td>Barcelona</td>
-            </tr>
-            <tr>
-                <td>Carlos García</td>
-                <td>45</td>
-                <td>Valencia</td>
-            </tr>
-        </tbody>
-    </table>   
- </body>
-</section>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Acciones</th>
+        </tr>
+        {% for item in inventario %}
+        <tr>
+            <td>{{ item._id }}</td>
+            <td>{{ item.nombre }}</td>
+            <td>{{ item.cantidad }}</td>
+            <td><a href="{{ url_for('delete_item', item_id=item._id) }}">Eliminar</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ url_for('add_item') }}">Añadir nuevo item</a>
+</body>
 </html>
