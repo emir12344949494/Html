@@ -1,3 +1,4 @@
+
 from flask import Flask, render_template, request, redirect, url_for
 from pymongo import MongoClient
 from bson.objectid import ObjectId
@@ -50,11 +51,11 @@ def inventario_route():
 def vista():
     return render_template('vista.html')
 
-@app.route('/datos')
+@app.route('/data')
 def data():
     db = get_db()
     inventario = list(db.cantidad.find())
-    return render_template('datos.html', inventario=inventario)
+    return render_template('data.html', inventario=inventario)
 
 @app.route('/add_item', methods=['GET', 'POST'])
 def add_item():
@@ -94,6 +95,7 @@ def register():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
 
 
