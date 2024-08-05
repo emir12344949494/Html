@@ -90,3 +90,8 @@ tr:hover {
     display: flex;
     gap: 50px;
 }
+
+.delta{
+    background: #f1f1f1;
+    height: 850px;
+}
