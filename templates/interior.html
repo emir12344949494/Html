@@ -2,57 +2,9 @@
 <html>
 <head>
     <title>Vizualizacion</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
     <link class="ops" rel="icon" href="{{ url_for('static', filename='css/database.svg') }}" type="image/svg+xml">
 </head>
-<style>
-    body {
-    font-family: Arial, sans-serif;
-    background-color: #333333;
-    padding: 20px;
-    }
-
-h1 {
-    color: #000000;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-table, th, td {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-th, td {
-    padding: 10px;
-    text-align: left;
-}
-
-th {
-    background-color: #f2f2f2;
-}
-
-tr:nth-child(even) {
-    background-color: #fafafa;
-}
-
-tr:hover {
-    background-color: #f1f1f1;
-}
-
-.container{
- margin: auto;
- background-color: #f1f1f1;
-}
-
-
-
-</style>
-
 <body>
   <section  class="container">
     <h1><center>Resgistro dentro de la base de datos</center></h1>
@@ -89,7 +41,7 @@ tr:hover {
         {% endfor %}
     </table>
   </section>
-  
+
   <section class="desarrollo">
     <footer>
     <br>
