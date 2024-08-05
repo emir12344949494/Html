@@ -50,11 +50,11 @@ def inventario_route():
 def vista():
     return render_template('vista.html')
 
-@app.route('/data')
+@app.route('/datos')
 def data():
     db = get_db()
     inventario = list(db.cantidad.find())
-    return render_template('data.html', inventario=inventario)
+    return render_template('datos.html', inventario=inventario)
 
 @app.route('/add_item', methods=['GET', 'POST'])
 def add_item():
