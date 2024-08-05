@@ -1,18 +1,18 @@
 from flask import Flask, render_template, request, redirect, url_for
-from pymongo import MongoClient
+from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
-app = Flask(__name__, static_folder="static")
+app = Flask(__name__)
 
 # MongoDB configuration
-def get_db():
-    client = MongoClient('mongodb+srv://22300040:Delta1500@dayrongc.b4fakiy.mongodb.net/')
-    db = client["BD1"]
-    return db
+app.config["MONGO_URI"] = "mongodb+srv://22300040:Delta1500@dayrongc.b4fakiy.mongodb.net/BD1"
+mongo = PyMongo(app)
 
 @app.route('/')
-def principal():
-    return render_template('principal.html')
+def index():
+    inventario = mongo.db.cantidad.find()
+    registros = mongo.db.registro.find()
+    return render_template('index.html', inventario=inventario, registros=registros)
 
 @app.route('/buscar')
 def buscar():
@@ -52,8 +52,7 @@ def vista():
 
 @app.route('/data')
 def data():
-    db = get_db()
-    inventario = list(db.cantidad.find())
+    inventario = list(mongo.db.cantidad.find())
     return render_template('data.html', inventario=inventario)
 
 @app.route('/add_item', methods=['GET', 'POST'])
@@ -61,15 +60,13 @@ def add_item():
     if request.method == 'POST':
         nombre = request.form['nombre']
         cantidad = request.form['cantidad']
-        db = get_db()
-        db.cantidad.insert_one({'nombre': nombre, 'cantidad': cantidad})
+        mongo.db.cantidad.insert_one({'nombre': nombre, 'cantidad': cantidad})
         return redirect(url_for('data'))
     return render_template('add_item.html')
 
 @app.route('/delete_item/<item_id>')
 def delete_item(item_id):
-    db = get_db()
-    db.cantidad.delete_one({'_id': ObjectId(item_id)})
+    mongo.db.cantidad.delete_one({'_id': ObjectId(item_id)})
     return redirect(url_for('data'))
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -80,8 +77,7 @@ def register():
         contraseña = request.form['password']
         sucursal = request.form['sucursal']
         base_datos = request.form['data']
-        db = get_db()
-        db.registro.insert_one({
+        mongo.db.registro.insert_one({
             'producto': producto,
             'clave_empleado': clave_empleado,
             'contraseña': contraseña,
@@ -93,14 +89,50 @@ def register():
 
 @app.route('/interior')
 def visualize_data():
-    db = get_db()
-    inventario = list(db.cantidad.find())
-    registros = list(db.registro.find())
+    inventario = list(mongo.db.cantidad.find())
+    registros = list(mongo.db.registro.find())
     return render_template('interior.html', inventario=inventario, registros=registros)
+
+@app.route('/editar_inventario/<id>', methods=['GET'])
+def editar_inventario(id):
+    item = mongo.db.cantidad.find_one({'_id': ObjectId(id)})
+    return render_template('editar_inventario.html', item=item)
+
+@app.route('/eliminar_inventario/<id>', methods=['POST'])
+def eliminar_inventario(id):
+    mongo.db.cantidad.delete_one({'_id': ObjectId(id)})
+    return redirect(url_for('index'))
+
+@app.route('/editar_registro/<id>', methods=['GET'])
+def editar_registro(id):
+    reg = mongo.db.registro.find_one({'_id': ObjectId(id)})
+    return render_template('editar_registro.html', reg=reg)
+
+@app.route('/eliminar_registro/<id>', methods=['POST'])
+def eliminar_registro(id):
+    mongo.db.registro.delete_one({'_id': ObjectId(id)})
+    return redirect(url_for('index'))
+
+@app.route('/anadir_registro', methods=['POST'])
+def anadir_registro():
+    producto = request.form.get('producto')
+    clave_empleado = request.form.get('clave_empleado')
+    contraseña = request.form.get('contraseña')
+    sucursal = request.form.get('sucursal')
+    base_datos = request.form.get('base_datos')
+    
+    mongo.db.registro.insert_one({
+        'producto': producto,
+        'clave_empleado': clave_empleado,
+        'contraseña': contraseña,
+        'sucursal': sucursal,
+        'base_datos': base_datos
+    })
+    
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True)
-
 
 
 
