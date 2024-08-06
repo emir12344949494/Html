@@ -92,8 +92,8 @@ tr:hover {
 
 .delta{
     background: #f1f1f1;
-    height: 850px;
-    width: 1590px;
+    height: auto;
+    width: auto;
 }
 
 .perro{
@@ -103,4 +103,18 @@ tr:hover {
 
 .home{
     font-size: 25px;
+}
+
+.mama {
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    padding: 14px 28px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.dgc {      
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
 }

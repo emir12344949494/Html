@@ -5,9 +5,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
     <link class="ops" rel="icon" href="{{ url_for('static', filename='css/database.svg') }}" type="image/svg+xml">
 </head>
-<style>
-    
-</style>
+
 <body>
  <section class="delta">
     <section>
@@ -18,84 +16,112 @@
      <section class="perro"> 
         <nav>
           <ul>
-            <li><a href="/"><strong>Home</strong></a></li>
+            <li><a href="/" title="Principal" ><svg xmlns="http://www.w3.org/2000/svg" width="45" height="50" fill="white" class="bi bi-house-fill" viewBox="0 0 16 16">
+                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
+                <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z"/>
+              </svg></a></li>
           </ul>
         </nav>
      </section>
     <br>
-    <h1>Inventario de la base de datos</h1>
-    <table border="1">
-        <tr>
-            <th>Nombre</th>
-            <th>Cantidad</th>
-        </tr>
-        {% for item in inventario %}
-        <tr>
-            <td>{{ item.nombre }}</td>
-            <td>{{ item.cantidad }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+    <script>
+        function editRow(button) {
+            let row = button.closest('tr');
+            let inputs = row.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.disabled = !input.disabled;
+            });
+            button.style.display = 'none';
+            row.querySelector('button[onclick="saveRow(this)"]').style.display = 'inline-block';
+        }
 
-    <h1>Registros de la base de datos</h1>
-    <table border="1">
-        <tr>
-            <th>Producto</th>
-            <th>Clave de empleado</th>
-            <th>Contraseña</th>
-            <th>Sucursal</th>
-            <th>Base de datos</th>
-        </tr>
-        {% for reg in registros %}
-        <tr>
-            <td>{{ reg.producto }}</td>
-            <td>{{ reg.clave_empleado }}</td>
-            <td>{{ reg.contraseña }}</td>
-            <td>{{ reg.sucursal }}</td>
-            <td>{{ reg.base_datos }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+        function saveRow(button) {
+            let row = button.closest('tr');
+            let id = row.dataset.id;
+            let nombre = row.querySelector('input[name="nombre"]').value;
+            let cantidad = row.querySelector('input[name="cantidad"]').value;
+
+            fetch('/update', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: id, nombre: nombre, cantidad: cantidad })
+            }).then(response => response.json()).then(data => {
+                if (data.success) {
+                    row.querySelectorAll('input').forEach(input => {
+                        input.disabled = true;
+                    });
+                    button.style.display = 'none';
+                    row.querySelector('button[onclick="editRow(this)"]').style.display = 'inline-block';
+                } else {
+                    alert('Los cambios se han guardado exitosamente en la base ');
+                }
+            });
+        }
+    </script>
+    <center><h1>Inventario de la base de datos</h1></center>
+    
+    <center>
+        <table border="2">
+            <tr>
+                <th>Nombre</th>
+                <th>Cantidad</th>
+                <th>Acciones</th>
+            </tr>
+            {% for item in inventario %}
+            <tr data-id="{{ item._id }}">
+                <td><input class="dgc" type="text" name="nombre" value="{{ item.nombre }}" disabled></td>
+                <td><input class="dgc" type="text" name="cantidad" value="{{ item.cantidad }}" disabled></td>
+                <td>
+                    <button class="mama" onclick="editRow(this)">editar</button>
+                    <button class="mama" onclick="saveRow(this)" style="display:none;">guardar</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </center>
+    <br>
   </section>
 
-        <section class="desarrollo">
-            <footer>
-                <div class="conttainer">
-                    <div class="info-box">
-                        <h3>Horario de atención</h3>
-                        <hr>
-                        <div class="section">
-                            <h4>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
-                                </svg>&nbsp;&nbsp;Callcenter
-                            </h4>
-                            <p>Lunes a Viernes: 09:00 a 18:30 hrs.</p>
-                            <p>Sábado: 09:00 a 13:30 hrs.</p>
-                        </div>
-                        <div class="section">
-                            <h4>Sucursales</h4>
-                            <p>Lunes a Viernes: 08:00 a 18:00 hrs.</p>
-                            <p>Sábado: 09:00 a 14:00 hrs.</p>
-                        </div>
-                    </div>
-                    <div class="info-box">
-                        <h3>Te puede interesar</h3>
-                        <hr>
-                        <ul>
-                            <li class="emir">Aviso de privacidad</li>
-                            <li class="emir">Bolsa de Trabajo</li>
-                            <li class="emir">Reportar Abusos</li>
-                            <li class="emir">Código de Conducta</li>
-                            <li class="emir">TGL</li>
-                            <li class="emir">Extranet</li>
-                            <li class="emir">Intranet</li>
-                            <li class="emir">Glosario</li>
-                        </ul>
-                    </div>
-                </div>
-            </footer>
-        </section>
- </section>
+  <section class="desarrollo">
+      <footer>
+          <div class="conttainer">
+              <div class="info-box">
+                  <h3>Horario de atención</h3>
+                  <hr>
+                  <div class="section">
+                      <h4>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                              <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+                          </svg>&nbsp;&nbsp;Callcenter
+                      </h4>
+                      <p>Lunes a Viernes: 09:00 a 18:30 hrs.</p>
+                      <p>Sábado: 09:00 a 13:30 hrs.</p>
+                  </div>
+                  <div class="section">
+                      <h4>Sucursales</h4>
+                      <p>Lunes a Viernes: 08:00 a 18:00 hrs.</p>
+                      <p>Sábado: 09:00 a 14:00 hrs.</p>
+                  </div>
+              </div>
+              <div class="info-box">
+                  <h3>Te puede interesar</h3>
+                  <hr>
+                  <ul>
+                      <li class="emir">Aviso de privacidad</li>
+                      <li class="emir">Bolsa de Trabajo</li>
+                      <li class="emir">Reportar Abusos</li>
+                      <li class="emir">Código de Conducta</li>
+                      <li class="emir">TGL</li>
+                      <li class="emir">Extranet</li>
+                      <li class="emir">Intranet</li>
+                      <li class="emir">Glosario</li>
+                  </ul>
+              </div>
+          </div>
+      </footer>
+  </section>
 </body>
 </html>
+

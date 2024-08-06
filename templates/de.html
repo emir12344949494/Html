@@ -3,93 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Equipos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/delta.css') }}">
+    <link  class="ops" rel="icon" href="{{ url_for('static', filename='css/circulo.svg') }}" type="image/svg+xml">
+
+    <title>Iniciar Sesión</title>
 </head>
 <body>
-    <style>
-        /* styles.css */
-
-/* Estilos generales */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-}
-
-.equipment-card {
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    padding: 20px;
-    margin: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-}
-
-h2 {
-    font-size: 1.2rem;
-    margin-top: 10px;
-}
-
-p {
-    font-size: 0.9rem;
-    color: #555;
-}
-
-/* Estilos para las pestañas */
-.tabs {
-    margin-top: 15px;
-}
-
-button {
-    background-color: #f5f5f5;
-    border: none;
-    padding: 5px 10px;
-    margin-right: 10px;
-    cursor: pointer;
-    border-radius: 3px;
-    transition: background-color 0.2s;
-}
-
-button:hover {
-    background-color: #ddd;
-}
-
-.info-tab {
-    color: #0074d9;
-}
-
-.details-tab {
-    color: #ff851b;
-}
-
-    </style>
-    <div class="equipment-card">
-        <img src="placeholder-image.jpg" alt="Equipo 1">
-        <h2>Krone Comprima V180XC</h2>
-        <p>MANUFACTURER: KRONE</p>
-        <p>TYPE: COMPRIMA V 180 XC</p>
-        <p>SHOP CATEGORY: BALERS</p>
-        <div class="tabs">
-            <button class="info-tab">INFO</button>
-            <button class="details-tab">DETALLES</button>
+ <div class="container">
+      <center><h1>Iniciar Sesión</h1></center>
+    <form action="{{ url_for('register') }}" method="post">
+        <div class="form-group">
+          <label for="username">Clave de Empleado:</label>
+          <input type="text" id="username" name="username" required>
         </div>
-    </div>
-
-    <div class="equipment-card">
-        <img src="placeholder-image.jpg" alt="Equipo 2">
-        <h2>Krone Big Pack 1290 HDP II XC</h2>
-        <p>MANUFACTURER: KRONE</p>
-        <p>TYPE: BIG PACK 1290 HDP II XC</p>
-        <p>SHOP CATEGORY: BALERS</p>
-        <div class="tabs">
-            <button class="info-tab">INFO</button>
-            <button class="details-tab">DETALLES</button>
+        <br>
+        <div class="form-group">
+           <label for="password">Contraseña:</label>
+           <input type="password" id="password" name="password" required>
         </div>
-    </div>
+        <br>
+        <div class="form-group">
+            <button type="submit" class="search-button">INGRESAR</button>
+            <br>
+            <br>
+            <button type="button" onclick="window.location.href='/'">REGRESAR AL MENU</button>
+        </div>
+         <br>
+        <p>Se debe de iniciar cesion para aunteticar al empleado encriptando sus datos.</p>
+    </form>
+ </div>
 </body>
 </html>
