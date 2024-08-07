@@ -16,10 +16,11 @@
             max-width: 600px;
             margin: auto;
             padding: 20px;
-            border: 1px solid #ddd;
-            background: #ddd;
+            border: 1px solid #ffffff;
+            background: #ffffff;
             border-radius: 8px;
         }
+
         h1 {
             text-align: center;
         }
@@ -29,24 +30,24 @@
         .form-group label {
             display: block;
             margin-bottom: 5px;
+            font-size: 20px;
         }
         .form-group input {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
             box-sizing: border-box;
+            font-size: 17px;
         }
         .form-group button {
-            padding: 10px 15px;
+            padding: 17px 85px;
             border: none;
             background-color: #000000;
             color: white;
             cursor: pointer;
             border-radius: 4px;
-            width: 100%;
-            height: 110%;
         }
         .form-group button:hover {
-            background-color: #ffffff;
+            background-color: #1f1f1f;
         }
         .flash-message {
             margin-bottom: 15px;
@@ -67,8 +68,9 @@
          width: 100%; /* Ajusta el ancho al 100% del contenedor */
          padding: 8px;
          box-sizing: border-box; 
-         border: 1px solid #ccc;
+         border: 1px solid #ffffff;
          border-radius: 5px; 
+         font-size: 17px;
         }
     </style>
 </head>
@@ -86,7 +88,7 @@
             {% endif %}
         {% endwith %}
 
-        <form action="{{ url_for('register') }}" method="post">
+        <form action="{{ url_for('inventario_route') }}" method="post">
             <div class="form-group">
                 <label for="exacto">Producto:</label>
                 <input type="text" id="exacto" name="exacto" required>
@@ -117,13 +119,14 @@
                 <input type="text" id="data" name="data" required>
             </div>
             <div class="form-group">
-                <button type="submit">Registrar</button>
+                <button type="submit" class="delta">REGISTRAR</button>
                  <br>
                    <br>
-                <button type="submit" onclick="location.href='/'">REGRESAR AL MENU</button>
+                <button type="submit"  onclick="location.href='/'">REGRESAR AL MENU</button>
+                   <br>
+                  <br>
+
             </div>
-         
-            
         </form>
     </div>
 </body>

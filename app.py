@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify, flash
 from pymongo import MongoClient
 from bson.objectid import ObjectId
+from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__, static_folder="static")
-app.secret_key = 'supersecretkey'  # Cambia esto a una clave secreta segura
+app.secret_key = 'your_secret_key'
+CORS(app)
 
 # MongoDB configuration
 def get_db():
@@ -44,7 +46,7 @@ def buzon():
 def person():
     return render_template('person.html')
 
-@app.route('/inventario')
+@app.route('/inventario', methods=['GET', 'POST'])
 def inventario_route():
     return render_template('inventario.html')
 
@@ -52,10 +54,41 @@ def inventario_route():
 def vista():
     return render_template('vista.html')
 
-@app.route('/de')
-def de():
-    return render_template('de.html')
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        
+        if username and password:
+            db = get_db()
+            user = db.users.find_one({'username': username})
+            if user and check_password_hash(user['password'], password):
+                flash('Inicio de sesión exitoso!', 'éxito')
+                return redirect(url_for('register'))
+            else:
+                flash('Nombre de usuario o contraseña no válidos', 'error')
+        else:
+            flash('Por favor, rellene ambos campos', 'error')
+    
+    return render_template('login.html')
 
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        
+        if username and password:
+            db = get_db()
+            hashed_password = generate_password_hash(password)
+            db.users.insert_one({'username': username, 'password': hashed_password})
+            flash('Registro exitoso!', 'success')
+            return redirect(url_for('login'))
+        else:
+            flash('Please fill in both fields', 'error')
+    
+    return render_template('register.html')
 
 @app.route('/add_item', methods=['GET', 'POST'])
 def add_item():
@@ -67,43 +100,21 @@ def add_item():
             return render_template('add_item.html')
         db = get_db()
         db.cantidad.insert_one({'nombre': nombre, 'cantidad': cantidad})
-        return redirect(url_for('register'))
+        flash('Ítem agregado exitosamente', 'success')
+        return redirect(url_for('inventario_route'))
     return render_template('add_item.html')
 
 @app.route('/delete_item/<item_id>')
 def delete_item(item_id):
     db = get_db()
     db.cantidad.delete_one({'_id': ObjectId(item_id)})
-    return redirect(url_for('data'))
-
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    if request.method == 'POST':
-        producto = request.form.get('exacto', '')
-        clave_empleado = request.form.get('username', '')
-        contraseña = request.form.get('password', '')
-        sucursal = request.form.get('sucursal', '')
-        base_datos = request.form.get('data', '')
-        if not producto or not clave_empleado or not contraseña or not sucursal or not base_datos:
-            flash('Todos los campos son requeridos', 'error')
-            return render_template('register.html')
-        hashed_password = generate_password_hash(contraseña)
-        db = get_db()
-        db.registro.insert_one({
-            'producto': producto,
-            'clave_empleado': clave_empleado,
-            'contraseña': hashed_password,
-            'sucursal': sucursal,
-            'base_datos': base_datos
-        })
-        flash('Registro exitoso', 'success')
-        return redirect(url_for('inventario_route'))
-    return render_template('register.html')
+    flash('Ítem eliminado exitosamente', 'success')
+    return redirect(url_for('visualize_data'))
 
 @app.route('/edit_record/<record_id>', methods=['GET', 'POST'])
 def edit_record(record_id):
     db = get_db()
-    record = db.registro.find_one({'_id': ObjectId(record_id)})
+    record = db.registros.find_one({'_id': ObjectId(record_id)})
     if request.method == 'POST':
         producto = request.form.get('exacto', '')
         clave_empleado = request.form.get('username', '')
@@ -114,7 +125,7 @@ def edit_record(record_id):
             flash('Todos los campos son requeridos', 'error')
             return render_template('edit_record.html', record=record)
         hashed_password = generate_password_hash(contraseña)
-        db.registro.update_one(
+        db.registros.update_one(
             {'_id': ObjectId(record_id)},
             {'$set': {
                 'producto': producto,
@@ -132,7 +143,7 @@ def edit_record(record_id):
 def visualize_data():
     db = get_db()
     inventario = list(db.cantidad.find())
-    registros = list(db.registro.find())
+    registros = list(db.registros.find())
     return render_template('interior.html', inventario=inventario, registros=registros)
 
 @app.route('/update', methods=['POST'])
@@ -155,24 +166,8 @@ def update():
     else:
         return jsonify({'success': False, 'message': 'No se pudo actualizar el ítem'})
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        clave_empleado = request.form.get('username', '')
-        contraseña = request.form.get('password', '')
-        db = get_db()
-        user = db.registro.find_one({'clave_empleado': clave_empleado})
-        if user and check_password_hash(user['contraseña'], contraseña):
-            flash('Inicio de sesión exitoso', 'success')
-            return redirect(url_for('inventario_route'))
-        else:
-            flash('Usuario o contraseña incorrectos', 'error')
-    return render_template('login.html')
-
 if __name__ == '__main__':
     app.run(debug=True)
-
-
 
 
 #Respuecuperar los datos 
