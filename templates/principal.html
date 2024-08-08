@@ -12,6 +12,14 @@
 <section class="colores">
 <body>
     <section  class="container"> 
+      <script>
+        document.getElementById('myForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var name = document.getElementById('name').value;
+            var sanitized = DOMPurify.sanitize(name);
+            document.getElementById('output').innerText = sanitized;
+        });
+    </script>
    
         <h1 class="home"><center>Logistica y mantenimiento de Vehiculos</h1>
           <h1 class="home"><center>Trailer Palza</h1>
